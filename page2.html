@@ -49,4 +49,13 @@
                 </div>
               </div>
     </div></div>
+    <script>
+        $(document).ready(function() {
+            $(":button").on("click", function(){ 
+                analytics.track('Button Clicked', {
+                    title: $(this).text().trim()
+                });
+            });
+        });
+    </script>
 </body></html>  
