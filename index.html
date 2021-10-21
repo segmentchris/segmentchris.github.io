@@ -138,9 +138,9 @@
 
       $("#subbtn").on("click", function(){ 
         let validform = chkForm();
-        let cint = ( $('input[name="sendsf"]:checked').val() == 1 ) ?  { 'Salesforce': true }  : { 'Salesforce': false };
+        let cint = ( $('input[name="sendsf"]:checked').val() == 1 ) ? true : false;
         if (validform) {
-          analytics.identify( null, {
+          analytics.identify( {
             first_name: $("#firstname").val(),
             last_name: $("#lastname").val(),
             email: $("#emailaddress").val(),
@@ -148,7 +148,7 @@
             company: $("#company").val(),
             job_title: $("#jobtitle").val(),
           }, {
-            integrations: cint
+            'integrations': { 'Salesforce': cint }
           } );
 
           analytics.track('Form Submitted', {
@@ -167,6 +167,7 @@
           alert("Form Error!");
         }
         
+        return false;
       });
 
     </script>
