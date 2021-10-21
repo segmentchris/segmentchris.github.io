@@ -106,10 +106,68 @@
         </form>
     </div></div>
     <script>
+      function chkForm() {
+
+        /*
+        const fn = $("#firstname").val();
+        const ln = $("#lastname").val();
+        const e = $("#emailaddress").val();
+        const p = $("#phonenumber").val();
+        const c = $("#company").val();
+        const j = $("#jobtitle").val();
+        */
+
+        var required = $('input,textarea,select').filter('[required]:visible');
+        var allRequired = true;
+        required.each(function(){
+            if($(this).val() == ''){
+                allRequired = false;
+            }
+        });
+
+        return allRequired;
+
+      }
+    </script>
+    <script>
       $("nav a").on("click", function(){ 
         analytics.track('Menu Link Clicked', {
           title: $(this).text(),
         });
       });
+
+      $("#subbtn").on("click", function(){ 
+        let validform = chkForm();
+        let cint = ( $('input[name="sendsf"]:checked').val() == 1 ) ?  { 'Salesforce': true }  : { 'Salesforce': false };
+        if (validform) {
+          analytics.identify( null, {
+            first_name: $("#firstname").val(),
+            last_name: $("#lastname").val(),
+            email: $("#emailaddress").val(),
+            phone: $("#phonenumber").val(),
+            company: $("#company").val(),
+            job_title: $("#jobtitle").val(),
+          }, {
+            integrations: cint
+          } );
+
+          analytics.track('Form Submitted', {
+            title: "Sample Form",
+            status: "SUCCESS"
+          });
+
+          alert("Thank You!");
+        } else {
+          analytics.track('Form Submitted', {
+            title: "Sample Form",
+            status: "FAILED",
+            error: "Required Fields Missing"
+          });
+
+          alert("Form Error!");
+        }
+        
+      });
+
     </script>
 </body></html>  
