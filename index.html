@@ -105,4 +105,11 @@
         </fieldset>
         </form>
     </div></div>
+    <script>
+      $("nav a").on("click", function(){ 
+        analytics.track('Menu Link Clicked', {
+          title: $(this).text(),
+        });
+      });
+    </script>
 </body></html>  
