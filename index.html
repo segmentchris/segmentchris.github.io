@@ -20,11 +20,13 @@
   </nav>
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
-    <form class="col-12">
+    <form class="col-12" action="">
         <fieldset>
         
         <!-- Form Name -->
         <legend>Form Name</legend>
+        <input id="leadstatus" name="leadstatus" type="hidden" placeholder="" value="New" required="">
+        <input id="leadsource" name="leadsource" type="hidden" placeholder="" value="Web - Segment" required="">
         
         <!-- Text input-->
         <div class="form-group">
@@ -53,6 +55,20 @@
           </div>
         </div>
         
+        <div class="form-group">
+          <label for="industry" class="col-4 col-form-label">Industry</label> 
+          <div class="col-8">
+            <select id="industry" name="industry" class="custom-select" required="required">
+              <option value="Commercial">Commercial</option>
+              <option value="Education">Education</option>
+              <option value="Financial Services">Financial Services</option>
+              <option value="Government">Government</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="Insurance">Insurance</option>
+            </select>
+          </div>
+        </div> 
+
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="jobtitle">Job Title</label>  
@@ -103,6 +119,13 @@
           </div>
         </div>
         
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="resetbtn"></label>
+          <div class="col-md-8">
+            <button id="resetbtn" name="resetbtn" class="btn btn-primary">Reset Analytics</button>
+          </div>
+        </div>
         </fieldset>
         </form>
     </div></div>
@@ -140,6 +163,7 @@
       $("#subbtn").on("click", function(){ 
         let validform = chkForm();
         let cint = ( $('input[name="sendsf"]:checked').val() == 1 ) ? true : false;
+        
         if (validform) {
           analytics.identify( {
             first_name: $("#firstname").val(),
@@ -148,6 +172,9 @@
             phone: $("#phonenumber").val(),
             company: $("#company").val(),
             job_title: $("#jobtitle").val(),
+            lead_status: $("#lead_status").val(),
+            lead_source: $("#leadsource").val(),
+            industry: $("#industry").children("option:selected").val()
           }, {
             'integrations': { 'Salesforce': cint }
           } );
@@ -171,5 +198,9 @@
         return false;
       });
 
+      $("#subbtn").on("click", function () {
+        analytics.reset();
+        return true;
+      });
     </script>
 </body></html>  
