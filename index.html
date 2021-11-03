@@ -126,7 +126,7 @@
       <fieldset>
         <!-- Button -->
         <div class="form-group">
-          <label class=" control-label" for="resetbtn">Reset Analytics</label>
+          <label class=" control-label" for="resetbtn"></label>
           <div class="">
             <button id="resetbtn" name="resetbtn" class="btn btn-primary">Reset Analytics</button>
           </div>
@@ -206,6 +206,7 @@
 
       $("#resetbtn").on("click", function () {
         analytics.reset();
+        window.location.assign('./?reset=true');
       });
     </script>
 </body></html>  
