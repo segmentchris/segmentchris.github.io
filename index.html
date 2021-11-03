@@ -20,7 +20,7 @@
   </nav>
     <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
-    <form class="col-12" action="">
+    <form class="col-12" id="dataform" action="">
         <fieldset>
         
         <!-- Form Name -->
@@ -147,7 +147,7 @@
         const j = $("#jobtitle").val();
         */
 
-        var required = $('input,textarea,select').filter('[required]:visible');
+        var required = $('#dataform input,textarea,select').filter('[required]:visible');
         var allRequired = true;
         required.each(function(){
             if($(this).val() == ''){
