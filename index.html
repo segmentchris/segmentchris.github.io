@@ -147,7 +147,7 @@
         const j = $("#jobtitle").val();
         */
 
-        var required = $('#dataform input,textarea,select').filter('[required]:visible');
+        var required = $('input,textarea,select').filter('[required]:visible');
         var allRequired = true;
         required.each(function(){
             if($(this).val() == ''){
@@ -204,7 +204,7 @@
         return false;
       });
 
-      $("#subbtn").on("click", function () {
+      $("#resetbtn").on("click", function () {
         analytics.reset();
         alert("Reset");
       });
