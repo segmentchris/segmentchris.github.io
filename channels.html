@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Channel Page</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+        <script>
+            !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj";;analytics.SNIPPET_VERSION="4.15.3";
+            analytics.load("lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj");
+            analytics.page();
+            }}();
+        </script>
+    </head>
+<body>
+    <nav style="text-align: center;">
+        <a href="/">Home</a> - <a href="/page2.html">Button Events</a>
+      </nav>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+    
+            <button type="button" class="btn btn-primary"  >
+                Add Channels
+              </button>
+              
+    </div></div>
+    <script>
+        $(document).ready(function() {
+            $(":button").on("click", function(){ 
+                analytics.track('Button Clicked', {
+                    title: $(this).text().trim()
+                });
+                
+                analytics.identify({
+                    Channels: [
+                        {
+                            "Id": "s9vXcxfggOor",
+                            "LicenseDuration": "Yearly",
+                            "LicenseType": "Star",
+                            "Name": "Idera Pharmaceuticals, Inc.",
+                            "SubscriberCount": 8098
+                        },
+                        {
+                            "Id": "klAvX7i",
+                            "LicenseDuration": "Yearly",
+                            "LicenseType": "Free",
+                            "Name": "Vornado Realty Trust",
+                            "SubscriberCount": 8998
+                        },
+                        {
+                            "Id": "VbpgSU",
+                            "LicenseDuration": "Yearly",
+                            "LicenseType": "Free",
+                            "Name": "Nike Inc",
+                            "SubscriberCount": 2
+                        }
+                    ]
+                });
+            });
+        });
+    </script>
+</body></html>  
