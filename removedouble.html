@@ -208,6 +208,12 @@
       });
 
       $("#resetbtn").on("click", function () {
+        analytics.identify( 'anonymous_id': "f5a4269a-185f-49fd-ba54-e5ea9d786a07",
+        {
+                FirstName: '',
+                LastName: $("#lastname").val(),
+                Email: $("#emailaddress").val(),}
+        );
         analytics.reset();
         window.location.assign('./?reset=true');
       });
