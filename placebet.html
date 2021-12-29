@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title>Demo Form</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+        <script>
+            !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj";;analytics.SNIPPET_VERSION="4.15.3";
+            // analytics.load("0XBnO9NWRsOtu3ERcCQ46CZaTl0XgHMb");  (Customer Test)
+            analytics.load("lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj");
+            analytics.page();
+            }}();
+        </script>
+    </head>
+<body>
+  <nav style="text-align: center;">
+    <a href="/">Home</a>
+    - <a href="/page2.html">Button Events</a>
+    - <a href="/analytics-ready.html">Analytics Ready</a>
+    - <a href="/analytics-exists.html">Analytics Exists</a>
+  </nav>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+    <form class="col-12" id="betform" action="">
+        <fieldset>
+        
+        <!-- Form Name -->
+        <legend>Place Bet Name</legend>
+        <input id="leadstatus" name="leadstatus" type="hidden" placeholder="" value="New" required="">
+        <input id="leadsource" name="leadsource" type="hidden" placeholder="" value="Web - Segment" required="">
+        
+        
+        <div class="form-group">
+          <label for="industry" class="col-4 col-form-label">Industry</label> 
+          <div class="col-8">
+            <select id="industry" name="industry" class="custom-select" required="required">
+              <option value="1738030a-4a57-4da8-8c38-1a8e19754a5c">Tony Tester</option>
+              <option value="bf66d7fc-fd1c-437c-8baf-4dcb702515bf">Bruce Wayne</option>
+              <option value="eml_8cd663d6d79045c7266bd7eaf05dc582d98805f3">Martha Davenport</option>
+              <option value="eml_f3e9792932d1b5ed9503011e874c823dd2222128">Isaac Reid</option>
+            </select>
+          </div>
+        </div> 
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="game">Game Name</label>  
+          <div class="col-md-8">
+          <input id="game" name="game" type="text" placeholder="" class="form-control input-md" required="required">
+            
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="wager_amount">Wager Amount</label>  
+          <div class="col-md-8">
+          <input id="wager_amount" name="wager_amount" type="text" placeholder="" class="form-control input-md" required="required">
+            
+          </div>
+        </div>
+       
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="subbtn"></label>
+          <div class="col-md-8">
+            <button id="subbtn" name="subbtn" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        
+       
+     </div>
+    
+    <script>
+      function chkForm() {
+
+        /*
+        const fn = $("#firstname").val();
+        const ln = $("#lastname").val();
+        const e = $("#emailaddress").val();
+        const p = $("#phonenumber").val();
+        const c = $("#company").val();
+        const j = $("#jobtitle").val();
+        */
+
+        var required = $('input,textarea,select').filter('[required]:visible');
+        var allRequired = true;
+        required.each(function(){
+            if($(this).val() == ''){
+                allRequired = false;
+            }
+        });
+
+        return allRequired;
+
+      }
+    </script>
+    <script>
+      $("nav a").on("click", function(){ 
+        analytics.track('Menu Link Clicked', {
+          title: $(this).text(),
+        });
+      });
+
+      $("#subbtn").on("click", function(){ 
+        let validform = chkForm();
+        analytics.setAnonymousId($("#industry").children("option:selected").val());
+
+        if (validform) {
+          analytics.track('Wager Placed', {
+            game_played: $("#game").val(),
+            wager_amount: $("#wager_amount").val(),
+            status: "SUCCESS"
+          });
+
+          alert("Thank You!");
+        } else {
+          analytics.track('Wager Failed', {
+            status: "FAILED",
+            error: "Required Fields Missing"
+          });
+
+          alert("Form Error!");
+        }
+        
+        return false;
+      });
+
+      $("#resetbtn").on("click", function () {
+        analytics.reset();
+        window.location.assign('./?reset=true');
+      });
+    </script>
+</body></html>  
