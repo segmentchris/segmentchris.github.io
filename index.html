@@ -99,6 +99,15 @@
           </div>
         </div>
         
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="activity">Activity</label>
+          <div class="col-md-8">
+            <input id="activity" name="activity" type="text" placeholder="" class="form-control input-md" required="">
+        
+          </div>
+        </div>
+
         <!-- Multiple Radios (inline) -->
         <div class="form-group">
           <label class="col-md-4 control-label" for="sendsf">Send to SF</label>
@@ -179,6 +188,7 @@
             email: $("#emailaddress").val(),
             phone: $("#phonenumber").val(),
             company: $("#company").val(),
+            activity: $("#activity").val(),
             job_title: $("#jobtitle").val(),
             lead_status: $("#lead_status").val(),
             lead_source: $("#leadsource").val(),
