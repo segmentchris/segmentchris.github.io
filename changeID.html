@@ -64,6 +64,7 @@
         var newID = $("#user").val();
         if ( newID !== '') {
             alert("New ID Set: " + newID);
+            analytics.reset();
             analytics.setAnonymousId(newID);
         } else {
             alert("Invalid Anonymous ID");
