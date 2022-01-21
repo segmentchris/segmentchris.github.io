@@ -20,14 +20,17 @@
   </nav>
     <div class="container h-100">
       <h1>Analytics Exists</h1>
+        <div id="response">Waiting...</div>
     </div>
     
     <script>
         $(document).ready(function () {
-            console.log("ready!");
+            console.log("document ready!");
             if (typeof analytics.ready === 'function') {
-                alert("Analytics Exists and Document Ready");
-                location.assign('https://segmentchris.github.io/');
+                // alert("Analytics Exists and Document Ready");
+                // location.assign('https://segmentchris.github.io/');
+                var aId = analytics.user().anonymousId();
+                jQuery("#response").html("Analytics Exists!  Your anonymous ID is: " + aId);
             }
         });
       
