@@ -20,7 +20,8 @@
   </nav>
     <div class="container h-100">
       <h1>Analytics Exists</h1>
-        <div id="response">Waiting...</div>
+        <div id="jqueryResp">Waiting...</div>
+        <div id="analyticsResp">Waiting...</div>
     </div>
     
     <script>
@@ -29,8 +30,9 @@
             if (typeof analytics.ready === 'function') {
                 // alert("Analytics Exists and Document Ready");
                 // location.assign('https://segmentchris.github.io/');
-                var aId = analytics.user().anonymousId();
-                jQuery("#response").html("Analytics Exists!  Your anonymous ID is: " + aId);
+                // var aId = analytics.user().anonymousId();
+                jQuery("#jqueryResp").html("Analytics Exists!");
+                jQuery("#analyticsResp").html("Local Storage anonymous ID: " + localStorage.ajs_anonymous_id);
             }
         });
       
