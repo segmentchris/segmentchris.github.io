@@ -20,14 +20,16 @@
   </nav>
     <div class="container h-100">
         <h1>Analytics Ready</h1>
-        
+        <div id="response">Waiting...</div>
   </div>
     
     
     <script>
         analytics.ready(function () {
-            alert("Analytics Ready");
-            location.assign('https://segmentchris.github.io/');
+            // alert("Analytics Ready");
+            // location.assign('https://segmentchris.github.io/');
+            var aId = analytics.user().anonymous_id();
+            jQuery("#response").text("Analytics is ready.  Welcome User " + aId);
         });
 
     </script>
