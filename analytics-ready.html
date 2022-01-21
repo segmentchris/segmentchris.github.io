@@ -28,8 +28,8 @@
         analytics.ready(function () {
             // alert("Analytics Ready");
             // location.assign('https://segmentchris.github.io/');
-            var aId = analytics.user().anonymous_id();
-            jQuery("#response").text("Analytics is ready.  Welcome User " + aId);
+            var aId = analytics.user().anonymousId();
+            jQuery("#response").html("Analytics is ready.  Welcome User " + aId);
         });
 
     </script>
