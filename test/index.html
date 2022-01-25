@@ -550,8 +550,8 @@
     });
   });
   $("li.pricing a.button").on("click", function(){ 
-    var optName = $(this).prev("h3").text();
-    var thePrice = $(this).prev(".price").text();
+    var optName = $(this).prevAll("h3").text();
+    var thePrice = $(this).prevAll(".price").text();
     console.log("Opt: " + optName + " - Price:" + thePrice);
     analytics.track('Button Clicked', {
       label: "purchase",
@@ -559,6 +559,19 @@
       price: thePrice
     });
   });
+  $("form button").on("click", function(){ 
+    analytics.identify({
+      email: $(this).prevAll(".email").val()
+    })
+    analytics.track('Form Submitted', {
+      label: "subscribe_newsletter",
+    });
+  });
+
+  window.onpopstate = function (event) {
+    // do stuff here
+    console.log("Screen Changed")
+  }
 </script>
 </body>
 </html>
