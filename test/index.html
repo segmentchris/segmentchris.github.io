@@ -551,9 +551,10 @@
   });
   $("li.pricing a.button").on("click", function(){ 
     var optName = $(this).prev("h3").text();
-    var thePrice = $(this).prev("div.price").text();
+    var thePrice = $(this).prev(".price").text();
+    console.log("Opt: " + optName + " - Price:" + thePrice);
     analytics.track('Button Clicked', {
-      label: "‘purchase’",
+      label: "purchase",
       pricing_option: optName,
       price: thePrice
     });
