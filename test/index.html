@@ -574,13 +574,19 @@
 
   // Form submit tracking
   $("form button").on("click", function(){ 
+    var emailAddress = $(this).prevAll("input[type=email]").val();
+
     analytics.identify({
-      email: $(this).prevAll(".email").val()
+      email: emailAddress
     })
+
     analytics.track('Form Submitted', {
       label: "subscribe_newsletter",
+      email: emailAddress
     });
 
+    console.log("Email Subscribed - " + emailAddress);
+    
     return false; // stop form submit
   });
 
