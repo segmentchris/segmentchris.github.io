@@ -571,8 +571,14 @@
   });
 
   $(window).on('slideChange',function(event, number, element){
-    analytics.page(null,$(element).data('title'), {properties: { url: "#"+$(element).data('name') }});
-    
+
+    analytics.page( {
+      name: $(element).data('name'),
+      title: $(element).data('title'),
+      path: window.location.pathname + "#" + $(element).data('name'),
+      url: window.location.href
+    });
+
     //Your code here, for example:
     console.log( "Current slide is " + $(element).data('title') + " #" + number);
   });
