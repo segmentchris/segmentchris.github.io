@@ -11,7 +11,7 @@
   <script>
     !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="S0PBjk9XK8X4hTFLtKqn8j9KtrIOBmyF";;analytics.SNIPPET_VERSION="4.15.3";
     analytics.load("S0PBjk9XK8X4hTFLtKqn8j9KtrIOBmyF");
-    analytics.page();
+    // analytics.page();
     }}();
   </script>
 
@@ -539,6 +539,7 @@
 <div class="progress-bar blue"></div>
 <script>
 
+  // Button Click Events
   $("#getAppBtn").on("click", function(){ 
     analytics.track('Button Clicked', {
       label: "get_app",
@@ -549,6 +550,8 @@
       label: "view_profile",
     });
   });
+
+  // Pricing Event
   $("li.pricing a.button").on("click", function(){ 
     var optName = $(this).prevAll("h3").text();
     var thePrice = $(this).prevAll(".price").text();
@@ -559,6 +562,17 @@
       price: thePrice
     });
   });
+
+  // Watch Face Events
+  $("section[data-name='creative'] li.dot").on("click", function(){ 
+    analytics.track('Slider Changed', {
+      label: "new_watch_face",
+    });
+
+    console.log("Watch Changed");
+  });
+
+  // Form submit tracking
   $("form button").on("click", function(){ 
     analytics.identify({
       email: $(this).prevAll(".email").val()
