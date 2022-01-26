@@ -566,6 +566,8 @@
     analytics.track('Form Submitted', {
       label: "subscribe_newsletter",
     });
+
+    return false; // stop form submit
   });
 
   window.onpopstate = function (event) {
