@@ -570,10 +570,11 @@
     return false; // stop form submit
   });
 
-  window.onpopstate = function (event) {
-    // do stuff here
-    console.log("Screen Changed")
-  }
+  $(window).on('slideChange',function(event, number, element){
+
+    //Your code here, for example:
+    console.log( "Current slide is " + $(element).data('title') + " #" + number);
+  });
 </script>
 </body>
 </html>
