@@ -586,16 +586,20 @@
     });
 
     console.log("Email Subscribed - " + emailAddress);
-    
+
     return false; // stop form submit
   });
 
   $(window).on('slideChange',function(event, number, element){
+    var pageName = $(element).data('name');
+    pageName = (!!pageName) ? pageName : ''
 
+    var pageTitle = $(element).data('title');
+    pageTitle = ( (pageTitle == undefined) || (pageTitle == 'Home')) ? $(document).attr('title') : pageTitle;
     analytics.page( {
-      name: $(element).data('name'),
-      title: $(element).data('title'),
-      path: window.location.pathname + "#" + $(element).data('name'),
+      name: pageName,
+      title: pageTitle,
+      path: window.location.pathname + "#" + pageName,
       url: window.location.href
     });
 
