@@ -102,6 +102,7 @@
           });
 
           analytics.track('Trait Added', {
+            [$("#game").val()]: $("#trait_value").val(),
             status: "SUCCESS"
           });
 
@@ -109,6 +110,7 @@
         } else {
           analytics.track('New Trait Failed', {
             status: "FAILED",
+            field_name: $("#game").val(),
             error: "Required Fields Missing"
           });
 
