@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <title>Add User ID</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+        <script>
+            !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj";;analytics.SNIPPET_VERSION="4.15.3";
+            // analytics.load("0XBnO9NWRsOtu3ERcCQ46CZaTl0XgHMb");  (Customer Test)
+            analytics.load("lWOajUEbU0QbTZJLe4LJnq4h8yWbLURj");
+            analytics.page();
+            }}();
+        </script>
+    </head>
+<body>
+  <nav style="text-align: center;">
+    <a href="/">Home</a>
+    - <a href="/page2.html">Button Events</a>
+    - <a href="/channels.html">Add Channels</a>
+    - <a href="/placebet.html">Place Bet</a>
+    - <a href="/addtrait.html">Custom Trait</a>
+    - <a href="/analytics-ready.html">Analytics Ready</a>
+    - <a href="/analytics-exists.html">Analytics Exists</a>
+  </nav>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+    <form class="col-12" id="betform" action="">
+        <fieldset>
+        
+        <!-- Form Name -->
+        <legend>Add User ID</legend>
+        
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="trait_value">Value</label>  
+          <div class="col-md-8">
+          <input id="trait_value" name="trait_value" type="text" placeholder="" class="form-control input-md" required="required">
+            
+          </div>
+        </div>
+       
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="subbtn"></label>
+          <div class="col-md-8">
+            <button id="subbtn" name="subbtn" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        
+       
+     </div>
+    
+    <script>
+      function chkForm() {
+
+        /*
+        const fn = $("#firstname").val();
+        const ln = $("#lastname").val();
+        const e = $("#emailaddress").val();
+        const p = $("#phonenumber").val();
+        const c = $("#company").val();
+        const j = $("#jobtitle").val();
+        */
+
+        var required = $('input,textarea,select').filter('[required]:visible');
+        var allRequired = true;
+        required.each(function(){
+            if($(this).val() == ''){
+                allRequired = false;
+            }
+        });
+
+        return allRequired;
+
+      }
+    </script>
+    <script>
+      $("nav a").on("click", function(){ 
+        analytics.track('Menu Link Clicked', {
+          title: $(this).text(),
+        });
+      });
+
+      $("#subbtn").on("click", function(){ 
+        
+        let validform = chkForm();
+        if (validform) {
+          analytics.identify($("#trait_value").val() );
+
+          analytics.track('UserID Added', {
+            status: "SUCCESS"
+          });
+
+          alert("Thank You!");
+        } else {
+          analytics.track('UserID Failed', {
+            status: "FAILED",
+          });
+
+          alert("Form Error!");
+        }
+        
+        return false;
+      });
+
+      $("#resetbtn").on("click", function () {
+        analytics.reset();
+        window.location.assign('./?reset=true');
+      });
+    </script>
+</body></html>  
