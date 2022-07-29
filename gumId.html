@@ -32,7 +32,19 @@
             jQuery("#response").html("Analytics is ready.  Welcome User " + aId);
         });
 
-    </script>
-    <script src="https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1"  crossorigin="anonymous"></script>
+        (async function (data = {}) {  
+            try{
+                const url =  'https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1';
+                const response = await fetch(url);
+                data =  await response.json(); 
+                console.log(JSON.stringify(data));
+                // parses JSON response into JavaScript objects
+            } catch {  
+                console.log("there was an error resolving your promise", error);
+            }
+            //console.log("heres your jokes", data);
+        })();
 
+    </script>
+   
 </body></html>  
