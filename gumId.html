@@ -37,8 +37,18 @@
         xhr.send();
 
         xhr.onload = function() {
-            console.log(xhr.response);
-            console.log(xhr.getAllResponseHeaders());
+            //console.log(xhr.response);
+            //console.log(xhr.getAllResponseHeaders());
+
+            fetch('https://gum.criteo.com/sync?s=1&c=510&r=2&j=gumId&a=1', {
+                credentials: 'include'
+            })
+            //.then((response) => response.json())
+            .then((data) => console.log(data.body) /*console.log(JSON.stringify(data)) */ )
+            .catch((error) => {
+                console.error('There has been a problem with your fetch operation: ', error);
+            });
+            
         };
 
         /*
