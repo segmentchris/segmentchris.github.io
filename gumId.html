@@ -44,7 +44,9 @@
                 credentials: 'include'
             })
             //.then((response) => response.json())
-            .then((data) => console.log(data.body) /*console.log(JSON.stringify(data)) */ )
+            .then((data) => {
+                console.log((data.body)); console.log(JSON.stringify(data.body)); 
+            })
             .catch((error) => {
                 console.error('There has been a problem with your fetch operation: ', error);
             });
