@@ -32,6 +32,16 @@
             jQuery("#response").html("Analytics is ready.  Welcome User " + aId);
         });
 
+        let xhr = new XMLHttpRequest();
+        xhr.open('get', 'https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1');
+        xhr.send();
+
+        xhr.onload = function() {
+            console.log(xhr.response);
+            console.log(xhr.getAllResponseHeaders());
+        };
+
+        /*
         (async function (data = {}) {  
             try{
                 const url =  'https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1';
@@ -44,7 +54,7 @@
             }
             //console.log("heres your jokes", data);
         })();
-
+        */
     </script>
    
 </body></html>  
