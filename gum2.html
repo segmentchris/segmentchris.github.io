@@ -31,26 +31,32 @@
             var aId = analytics.user().anonymousId();
             jQuery("#response").html("Analytics is ready.  Welcome User " + aId);
 
-            fetch('https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1', {
-                credentials: 'include'
-            })
-            .then(response => {
-            // handle the response
-                var script = document.createElement('script');
-                script.src = 'https://gum.criteo.com/sync?s=1&c=510&r=2&j=addGumId&a=1';
-                document.querySelector('head').appendChild(script);
-            })
-            .catch(error => {
-                // handle the error
-                console.error('Request Error: ', error);
-            });
+            const gumId = localStorage.getItem('criteo_gum_id');
+
+            if (gumId === null) {
+                fetch('https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1', {
+                    credentials: 'include'
+                })
+                .then(response => {
+                // handle the response
+                    var script = document.createElement('script');
+                    script.src = 'https://gum.criteo.com/sync?s=1&c=510&r=2&j=addGumId&a=1';
+                    document.querySelector('head').appendChild(script);
+                })
+                .catch(error => {
+                    // handle the error
+                    console.error('Request Error: ', error);
+                });
+            }
         });
 
         function addGumId(cRes) {
-            // console.log(cRes);
-            
             // cRes = JSON.parse(criteoRep); 
             if (cRes.status == "OK") {
+                localStorage.setItem('criteo_gum_id', cRes.userid);
+                expDate = new Date();
+                expDate.setDate(expDate.getDate()+30);
+                document.cookie = "criteo_gum_id=" + cRes.userid + "; expires=" + expDate.toUTCString() + "; path=/";
                 // alert("GUM: " + cRes.userid);
                 analytics.identify({ 'criteo_gum_id': cRes.userid });
             } else {
