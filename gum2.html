@@ -30,43 +30,34 @@
             // location.assign('https://segmentchris.github.io/');
             var aId = analytics.user().anonymousId();
             jQuery("#response").html("Analytics is ready.  Welcome User " + aId);
-        });
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('get', 'https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1');
-        xhr.send();
-
-        xhr.onload = function() {
-            //console.log(xhr.response);
-            //console.log(xhr.getAllResponseHeaders());
-
-            fetch('https://gum.criteo.com/sync?s=1&c=510&r=2&j=gumId&a=1', {
+            fetch('https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1', {
                 credentials: 'include'
             })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log((data.body)); console.log(JSON.stringify(data.body)); 
+            .then(response => {
+            // handle the response
+                var script = document.createElement('script');
+                script.src = 'https://gum.criteo.com/sync?s=1&c=510&r=2&j=addGumId&a=1';
+                document.querySelector('head').appendChild(script);
             })
-            .catch((error) => {
-                console.error('There has been a problem with your fetch operation: ', error);
+            .catch(error => {
+                // handle the error
+                console.error('Request Error: ', error);
             });
-            
-        };
+        });
 
-        /*
-        (async function (data = {}) {  
-            try{
-                const url =  'https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1';
-                const response = await fetch(url);
-                data =  await response.json(); 
-                console.log(JSON.stringify(data));
-                // parses JSON response into JavaScript objects
-            } catch {  
-                console.log("there was an error resolving your promise");
+        function addGumId(cRes) {
+            // console.log(cRes);
+            
+            // cRes = JSON.parse(criteoRep); 
+            if (cRes.status == "OK") {
+                // alert("GUM: " + cRes.userid);
+                analytics.identify({ 'criteo_gum_id': cRes.userid });
+            } else {
+                console.log("Criteo Error: " + cRes.status);
             }
-            //console.log("heres your jokes", data);
-        })();
-        */
+            
+        }
     </script>
    
 </body></html>  
