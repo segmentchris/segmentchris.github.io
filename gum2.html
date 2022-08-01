@@ -29,7 +29,8 @@
     contextTracking = (contextTracking === null) ? {} : contextTracking;
 
     const urlParams = new URLSearchParams(window.location.search);
-    for (const [key, value] of urlParams) {
+    // for (const [key, value] of urlParams) {
+    urlParams.forEach(function(value, key) {
         lowerKey = key.toLowerCase();
 
         //console.log(`${key}:${value}`);
@@ -39,7 +40,7 @@
             contextTracking[lowerKey] = value;
             // console.log(`${key} ADDED`);
         } 
-    }
+    });
     localStorage.setItem('contextTracking', JSON.stringify(contextTracking));
 
 </script>
@@ -78,41 +79,41 @@ if (typeof analytics === 'object') {
 }
 </script>
    
-   <script>
-    const gumId = localStorage.getItem('criteo_gumid');
-    if (gumId === null) {
-        fetch('https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1', {
-            credentials: 'include'
-        })
-        .then(response => {
-        // handle the response
-            var script = document.createElement('script');
-            script.src = 'https://gum.criteo.com/sync?s=1&c=510&r=2&j=addGumId&a=1';
-            document.querySelector('head').appendChild(script);
-        })
-        .catch(error => {
-            // handle the error
-            console.error('Request Error: ', error);
-        });
-    }
-    function addGumId(cRes) {
-        // cRes = JSON.parse(criteoRep); 
-        if (cRes.status == "OK") {
-            localStorage.setItem('criteo_gumid', cRes.userid);
+<script>
+const gumId = localStorage.getItem('criteo_gumid');
+if (gumId === null) {
+    fetch('https://gum.criteo.com/sync?c=510&r=2&j=gumId&a=1', {
+        credentials: 'include'
+    })
+    .then(response => {
+    // handle the response
+        var script = document.createElement('script');
+        script.src = 'https://gum.criteo.com/sync?s=1&c=510&r=2&j=addGumId&a=1';
+        document.querySelector('head').appendChild(script);
+    })
+    .catch(error => {
+        // handle the error
+        console.error('Request Error: ', error);
+    });
+}
+function addGumId(cRes) {
+    // cRes = JSON.parse(criteoRep); 
+    if (cRes.status == "OK") {
+        localStorage.setItem('criteo_gumid', cRes.userid);
 
-            let contextTracking = JSON.parse(localStorage.getItem('contextTracking'));
-            contextTracking = (contextTracking === null) ? {} : contextTracking;
-            contextTracking.criteo_gumid = cRes.userid;
-            localStorage.setItem('contextTracking', JSON.stringify(contextTracking));
-            /*
-            expDate = new Date();
-            expDate.setDate(expDate.getDate()+30);
-            document.cookie = "criteo_gumid=" + cRes.userid + "; expires=" + expDate.toUTCString() + "; path=/";
-            */
-            if (typeof analytics === 'object') analytics.identify({ 'criteo_gumid': cRes.userid });
-        } else {
-            // console.log("Criteo Error: " + cRes.status);
-        }
+        let contextTracking = JSON.parse(localStorage.getItem('contextTracking'));
+        contextTracking = (contextTracking === null) ? {} : contextTracking;
+        contextTracking.criteo_gumid = cRes.userid;
+        localStorage.setItem('contextTracking', JSON.stringify(contextTracking));
+        /*
+        expDate = new Date();
+        expDate.setDate(expDate.getDate()+30);
+        document.cookie = "criteo_gumid=" + cRes.userid + "; expires=" + expDate.toUTCString() + "; path=/";
+        */
+        if (typeof analytics === 'object') analytics.identify({ 'criteo_gumid': cRes.userid });
+    } else {
+        // console.log("Criteo Error: " + cRes.status);
     }
-   </script>
+}
+</script>
 </body></html>  
