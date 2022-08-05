@@ -59,19 +59,33 @@ if (typeof analytics === 'object') {
    
     var STRKMIDDLE = function({ payload, next, integrations }) {
         // console.log(payload.obj);
-        const type = payload.type();
-        // Update the Context Traits on Track and Page Calls
-        if ( (type == 'track') || (type == 'page')) {
-            const contextTracking = JSON.parse(localStorage.getItem('contextTracking'));
-            if (contextTracking !== null) {
-                if (! payload.obj.context.hasOwnProperty("traits")) { payload.obj.context.traits = {}; }
-                payload.obj.context.traits.tracking = contextTracking;
-    
-                //console.log(JSON.stringify(payload.obj.context));
-                //console.log("Tracking: " + JSON.stringify(contextTracking));
-            }   
-        } 
         
+        const contextTracking = JSON.parse(localStorage.getItem('contextTracking'));
+        if (contextTracking !== null) {
+            const type = payload.type();
+            // Update the Context Traits on Track and Page Calls
+            if ( (type == 'track') || (type == 'page')) {
+                    if (! payload.obj.context.hasOwnProperty("traits")) { payload.obj.context.traits = {}; }
+                    payload.obj.context.traits.tracking = contextTracking;
+        
+                    //console.log(JSON.stringify(payload.obj.context));
+                    //console.log("Tracking: " + JSON.stringify(contextTracking));
+            } else if (type == 'identify') {
+                if (! payload.obj.context.hasOwnProperty("externalIds")) { payload.obj.context.externalIds = []; }
+                for (const key in contextTracking){
+                    if(obj.hasOwnProperty(key)){
+                        payload.context.externalIds.push({
+                            'id': contextTracking[key],
+                            'type': key,
+                            collection: 'users',
+                            encoding: 'none'
+                        }); 
+                        //console.log(`${key} : ${contextTracking[key]}`)
+                    }
+                }
+            }
+        }
+
         next(payload);
     };
     
